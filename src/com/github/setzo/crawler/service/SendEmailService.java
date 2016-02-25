@@ -11,11 +11,8 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.springframework.stereotype.Component;
-
 import com.github.setzo.crawler.config.ApplicationConfig;
 
-@Component("sendEmailService")
 public class SendEmailService {
 
 	private Properties props;

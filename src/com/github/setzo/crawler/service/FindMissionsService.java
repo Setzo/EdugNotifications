@@ -9,12 +9,10 @@ import java.util.regex.Pattern;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import org.springframework.stereotype.Component;
 
 import com.github.setzo.crawler.entity.Mission;
 import com.github.setzo.crawler.entity.MissionType;
 
-@Component("findMissionsService")
 public class FindMissionsService {
 	
 	private Map<String, MissionType>  missionMap;
@@ -51,11 +49,11 @@ public class FindMissionsService {
 			list.parent().parent().select(".nav-children").forEach(mission -> {
 				mission.childNodes().forEach(node -> {
 					
-					Matcher matcher = Pattern.compile("(?<=(>))([\\da-zA-Z\\s]+)(?=<\\/a>)")
+					Matcher matcher = Pattern.compile("(?<=>)([\\da-zA-Z\\s]+)(?=<\\/a>)")
 							.matcher(node.toString());
 					
 					while (matcher.find()) {
-						missionList.add(new Mission(matcher.group(2), type));
+						missionList.add(new Mission(matcher.group(1), type));
 					}
 					
 				});

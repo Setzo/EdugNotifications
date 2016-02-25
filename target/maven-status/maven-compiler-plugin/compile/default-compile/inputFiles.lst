@@ -1,0 +1,8 @@
+/home/setzo/Works/Crawler/src/com/github/setzo/crawler/entity/Mission.java
+/home/setzo/Works/Crawler/src/com/github/setzo/crawler/service/DownloadHtmlService.java
+/home/setzo/Works/Crawler/src/com/github/setzo/crawler/service/SendEmailService.java
+/home/setzo/Works/Crawler/src/com/github/setzo/crawler/entity/MissionType.java
+/home/setzo/Works/Crawler/src/com/github/setzo/crawler/service/DatabaseHandlerService.java
+/home/setzo/Works/Crawler/src/com/github/setzo/crawler/config/ApplicationConfig.java
+/home/setzo/Works/Crawler/src/com/github/setzo/crawler/Main.java
+/home/setzo/Works/Crawler/src/com/github/setzo/crawler/service/FindMissionsService.java

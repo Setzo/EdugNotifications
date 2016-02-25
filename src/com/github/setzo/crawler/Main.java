@@ -3,41 +3,58 @@ package com.github.setzo.crawler;
 import java.util.List;
 
 import org.jsoup.nodes.Document;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.github.setzo.crawler.config.ApplicationConfig;
 import com.github.setzo.crawler.entity.Mission;
+import com.github.setzo.crawler.service.DatabaseHandlerService;
 import com.github.setzo.crawler.service.DownloadHtmlService;
 import com.github.setzo.crawler.service.FindMissionsService;
+import com.github.setzo.crawler.service.SendEmailService;
 
 public class Main {
 
-	private static ApplicationContext appContext;
 	
 	public static void main(String[] args) {
 
-		Main.appContext = new ClassPathXmlApplicationContext("com/github/setzo/crawler/beans/beans.xml");
+		DownloadHtmlService downloadService = new DownloadHtmlService();
 		
-		DownloadHtmlService downloadService = Main.appContext.getBean(DownloadHtmlService.class);
+		FindMissionsService missionService = new FindMissionsService();
 		
-		FindMissionsService missionService = Main.appContext.getBean(FindMissionsService.class);
+		DatabaseHandlerService databaseService = new DatabaseHandlerService();
 		
-		while(true) {
+		SendEmailService mailService = new SendEmailService();
+		
+		try {
+			Main.iterate(downloadService, missionService, databaseService, mailService);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private static void iterate(DownloadHtmlService downloadService, 
+			FindMissionsService missionService, 
+			DatabaseHandlerService databaseService,
+			SendEmailService mailService) throws Exception {
+		
+		Document doc = downloadService.getHtml();
+		
+		List<Mission> results = missionService.findMissions(doc);
+		
+		results.forEach(result -> {
 			
 			try {
-				
-				Document doc = downloadService.getHtml();
-				
-				List<Mission> results = missionService.findMissions(doc);
-				
-				results.forEach(System.out::println);
-				
-				Thread.sleep(10000);
-				
+				if(!databaseService.checkIfMissionExists(result)) {
+					databaseService.saveMission(result);
+					mailService.sendNotifications(
+						ApplicationConfig.getSendToList(),
+						"New Mission",
+						String.format("\n%s%s\n%s%s\n", "New Mission: ", result.getName(), "Type: ", result.getType().name())
+					);
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
+		});
 	}
 
 }

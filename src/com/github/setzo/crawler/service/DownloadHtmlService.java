@@ -6,11 +6,9 @@ import org.jsoup.Connection;
 import org.jsoup.Connection.Method;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.springframework.stereotype.Component;
 
 import com.github.setzo.crawler.config.ApplicationConfig;
 
-@Component("downloadHtmlService")
 public class DownloadHtmlService {
 
 	public Document getHtml() throws IOException {

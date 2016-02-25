@@ -1,0 +1,8 @@
+com/github/setzo/crawler/service/DatabaseHandlerService.class
+com/github/setzo/crawler/entity/Mission.class
+com/github/setzo/crawler/config/ApplicationConfig.class
+com/github/setzo/crawler/service/DownloadHtmlService.class
+com/github/setzo/crawler/entity/MissionType.class
+com/github/setzo/crawler/service/FindMissionsService.class
+com/github/setzo/crawler/service/SendEmailService.class
+com/github/setzo/crawler/Main.class
