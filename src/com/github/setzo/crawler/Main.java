@@ -26,8 +26,10 @@ public class Main {
 		
 		try {
 			Main.iterate(downloadService, missionService, databaseService, mailService);
+			System.exit(0);
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.exit(0);
 		}
 	}
 	
