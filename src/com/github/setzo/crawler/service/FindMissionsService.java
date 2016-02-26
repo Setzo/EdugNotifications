@@ -49,7 +49,7 @@ public class FindMissionsService {
 			list.parent().parent().select(".nav-children").forEach(mission -> {
 				mission.childNodes().forEach(node -> {
 					
-					Matcher matcher = Pattern.compile("(?<=>)([\\da-zA-Z\\s]+)(?=<\\/a>)")
+					Matcher matcher = Pattern.compile("(?<=>)([\\d\\p{L}\\s]+)(?=<\\/a>)")
 							.matcher(node.toString());
 					
 					while (matcher.find()) {
