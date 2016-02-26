@@ -1,5 +1,6 @@
 package com.github.setzo.crawler;
 
+import java.util.Date;
 import java.util.List;
 
 import org.jsoup.nodes.Document;
@@ -13,7 +14,6 @@ import com.github.setzo.crawler.service.SendEmailService;
 
 public class Main {
 
-	
 	public static void main(String[] args) {
 
 		DownloadHtmlService downloadService = new DownloadHtmlService();
@@ -50,7 +50,10 @@ public class Main {
 					mailService.sendNotifications(
 						ApplicationConfig.getSendToList(),
 						"New Mission",
-						String.format("\n%s%s\n%s%s\n", "New Mission: ", result.getName(), "Type: ", result.getType().name())
+						String.format("\n%s%s\n%s%s\n%s%s\n", 
+								"New Mission: ", result.getName(), 
+								"Type: ", result.getType().name(),
+								"Date Found: ", (new Date(result.getDate().getEpochSecond() * 1000L)).toString())
 					);
 				}
 			} catch (Exception e) {

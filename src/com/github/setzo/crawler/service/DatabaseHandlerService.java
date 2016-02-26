@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 import com.github.setzo.crawler.config.ApplicationConfig;
 import com.github.setzo.crawler.entity.Mission;
@@ -69,12 +70,12 @@ public class DatabaseHandlerService {
 		
 		PreparedStatement insert = 
 				con.prepareStatement
-				("insert into Missions (type, name, notifiedTimes) value(?, ?, ?)");
+				("insert into Missions (type, name, dateFound) value(?, ?, ?)");
 		
 		int col = 1;
 		insert.setInt(col++, mission.getType().getId());
 		insert.setString(col++, mission.getName());
-		insert.setInt(col++, 0);
+		insert.setTimestamp(col++, new Timestamp(mission.getDate().getEpochSecond() * 1000L));
 		
 		insert.executeUpdate();
 		

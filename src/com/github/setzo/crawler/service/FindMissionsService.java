@@ -1,5 +1,6 @@
 package com.github.setzo.crawler.service;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -53,7 +54,7 @@ public class FindMissionsService {
 							.matcher(node.toString());
 					
 					while (matcher.find()) {
-						missionList.add(new Mission(matcher.group(1), type));
+						missionList.add(new Mission(matcher.group(1), type, Instant.now()));
 					}
 					
 				});

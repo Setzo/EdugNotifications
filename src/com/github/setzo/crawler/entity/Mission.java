@@ -1,21 +1,23 @@
 package com.github.setzo.crawler.entity;
 
-import javax.annotation.Resource;
+import java.time.Instant;
 
-@Resource(name="mission")
 public class Mission {
-
-	public Mission() {
-	}
-	
-	public Mission(String name, MissionType type) {
-		this.name = name;
-		this.type = type;
-	}
 
 	private String name;
 	
 	private MissionType type;
+	
+	private Instant date;
+	
+	public Mission() {
+	}
+	
+	public Mission(String name, MissionType type, Instant date) {
+		this.name = name;
+		this.type = type;
+		this.date = date;
+	}
 
 	public String getName() {
 		return name;
@@ -35,5 +37,13 @@ public class Mission {
 	
 	public String toString() {
 		return String.format("%s%s%s%s", "Name: ", this.name, ", Type: ", this.type.name());
+	}
+
+	public Instant getDate() {
+		return date;
+	}
+
+	public void setDate(Instant date) {
+		this.date = date;
 	}
 }
