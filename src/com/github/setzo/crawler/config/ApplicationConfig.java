@@ -27,7 +27,7 @@ public class ApplicationConfig {
 	
 	private static final transient String smtpTls = "true";
 
-	private static final transient String databaseConnectionUrl = "DATABASE_URL";
+	private static final transient String databaseConnectionUrl = "jdbc:mysql://localhost:3306/crawlie";
 	
 	private static final transient String databaseUsername = "DATABASE_USERNAME";
 	
